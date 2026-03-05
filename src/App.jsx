@@ -20,17 +20,15 @@ import {
   Link as LinkIcon,
 } from "lucide-react";
 
+const BASE = import.meta.env.BASE_URL;
+
 const ASSETS = {
-  // User noted the old portrait path was not visible. Use the international festival photo (shows Renato) as a reliable visual.
-  portrait: "/Renato LI.jpg",
-  mednarodna: "/Mednarodna.jpg",
-  presentation: "/Predstavitev.png",
-  letterRuzzier: "sandbox:/mnt/data/7a4ac7a3-a002-4e40-b917-8e31268d81f3.png",
-  letterMilost: "sandbox:/mnt/data/e6da183d-2cd9-48da-baa1-96c15343ff67.png",
-  bjtCertificate: "sandbox:/mnt/data/95405c8a-ec92-46ee-a649-f03a1fe7a4ac.png",
-  bjtTranscript: "sandbox:/mnt/data/1708bb67-acb5-4598-8761-ca100706e045.png",
-  bjtCourseDesc: "sandbox:/mnt/data/0df549cd-bc47-4b93-8244-db3b0223ac22.png",
+  festival: `${BASE}Mednarodna.jpg`,
+  portrait: `${BASE}Renato LI.jpg`,
+  mednarodna: `${BASE}Mednarodna.jpg`,
+  presentation: `${BASE}Predstavitev.png`,
 };
+
 
 const CONTACT = {
   linkedin: "https://www.linkedin.com/in/renatokostomaj/",
@@ -38,9 +36,10 @@ const CONTACT = {
 };
 
 const LINKS = {
-  mensa: "/Mensa certifikat.pdf",
-  nuix: "/Nuix certificate.pdf",
+  mensa: `${BASE}Mensa certifikat.pdf`,
+  nuix: `${BASE}Nuix certificate.pdf`,
 };
+
 
 const SKILLS = {
   sl: [
@@ -298,19 +297,19 @@ const DOC_ITEMS = [
     key: "ruzzier",
     title: { sl: "Priporočilno pismo prof. Mitja Ruzzier", en: "Recommendation Letter – Prof. Mitja Ruzzier" },
     subtitle: { sl: "Akademsko priporočilo", en: "Academic Recommendation Letter" },
-    link: "/Priporočilno pismo prof. Mitja Ruzzier.pdf",
+    link: `${BASE}Priporočilno pismo prof. Mitja Ruzzier.pdf`,
   },
   {
     key: "milost",
     title: { sl: "Priporočilno pismo prof. Franko Milost", en: "Recommendation Letter – Prof. Franko Milost" },
     subtitle: { sl: "Akademsko priporočilo", en: "Academic Recommendation Letter" },
-    link: "/Priporočilno pismo prof. Franko Milost.pdf",
+    link: `${BASE}Priporočilno pismo prof. Franko Milost.pdf`,
   },
   {
     key: "bjt-cert",
     title: { sl: "Beijing Jiaotong University Certificate", en: "Beijing Jiaotong University Certificate" },
     subtitle: { sl: "Potrdilo o študijski izmenjavi – Kitajska", en: "Study Exchange Certificate – China" },
-    link: "/Beijing Jiaotong University Certificate.pdf",
+    link: `${BASE}Beijing Jiaotong University Certificate.pdf`,
   },
 ];
 
