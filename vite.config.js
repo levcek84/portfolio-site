@@ -2,8 +2,8 @@
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
-export default defineConfig(({ command, isPreview }) => ({
-  base: command === "serve" && !isPreview ? "/" : "/portfolio-site/",
+export default defineConfig(() => ({
+  base: "/",
   appType: "mpa",
   plugins: [react(), tailwindcss()],
   server: {
