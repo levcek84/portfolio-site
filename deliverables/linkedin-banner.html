@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1584, initial-scale=1" />
+    <title>Renato Koštomaj — LinkedIn banner</title>
+    <style>
+      @font-face {
+        font-family: "Bricolage Grotesque";
+        src: url("../src/assets/fonts/bricolage-latin-ext.woff2") format("woff2");
+        font-weight: 200 800;
+        font-stretch: 75% 100%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+
+      @font-face {
+        font-family: "Bricolage Grotesque";
+        src: url("../src/assets/fonts/bricolage-latin.woff2") format("woff2");
+        font-weight: 200 800;
+        font-stretch: 75% 100%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
+      @font-face {
+        font-family: "DM Sans";
+        src: url("../src/assets/fonts/dm-sans-latin-ext.woff2") format("woff2");
+        font-weight: 300 800;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+
+      @font-face {
+        font-family: "DM Sans";
+        src: url("../src/assets/fonts/dm-sans-latin.woff2") format("woff2");
+        font-weight: 300 800;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
+      @font-face {
+        font-family: "DM Mono";
+        src: url("../src/assets/fonts/dm-mono-500-latin-ext.woff2") format("woff2");
+        font-weight: 500;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+
+      @font-face {
+        font-family: "DM Mono";
+        src: url("../src/assets/fonts/dm-mono-500-latin.woff2") format("woff2");
+        font-weight: 500;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
+      * { box-sizing: border-box; }
+
+      html,
+      body {
+        width: 1584px;
+        height: 396px;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        position: relative;
+        color: #edeae2;
+        background:
+          radial-gradient(circle at 81% 40%, rgba(109, 106, 255, 0.24), transparent 310px),
+          radial-gradient(circle at 48% 118%, rgba(255, 93, 48, 0.13), transparent 340px),
+          #06070a;
+        font-family: "DM Sans", sans-serif;
+      }
+
+      .grid {
+        position: absolute;
+        inset: 0;
+        opacity: 0.38;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+        background-size: 72px 72px;
+      }
+
+      .accent-line {
+        position: absolute;
+        top: 0;
+        left: 420px;
+        width: 410px;
+        height: 6px;
+        background: #6d6aff;
+      }
+
+      .monogram {
+        position: absolute;
+        top: 48px;
+        left: 68px;
+        display: grid;
+        width: 86px;
+        height: 86px;
+        place-items: center;
+        color: #08090c;
+        border-radius: 22px;
+        background: #6d6aff;
+        box-shadow: 0 18px 45px rgba(109, 106, 255, 0.24);
+        font-family: "Bricolage Grotesque", "Arial Black", sans-serif;
+        font-size: 25px;
+        font-weight: 800;
+        letter-spacing: -0.07em;
+        transform: rotate(-3deg);
+      }
+
+      .left-code {
+        position: absolute;
+        top: 155px;
+        left: 76px;
+        color: rgba(237, 234, 226, 0.46);
+        font-family: "DM Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        line-height: 1.9;
+      }
+
+      .content {
+        position: absolute;
+        top: 54px;
+        left: 450px;
+        z-index: 2;
+      }
+
+      .eyebrow {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 22px;
+        color: #ff7a4d;
+        font-family: "DM Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+      }
+
+      .eyebrow::before {
+        width: 42px;
+        height: 2px;
+        background: #6d6aff;
+        content: "";
+      }
+
+      h1 {
+        margin: 0;
+        font-family: "Bricolage Grotesque", "Arial Black", sans-serif;
+        font-size: 76px;
+        font-weight: 750;
+        letter-spacing: -0.075em;
+        line-height: 0.82;
+      }
+
+      h1 span {
+        color: transparent;
+        -webkit-text-stroke: 1.5px rgba(237, 234, 226, 0.82);
+      }
+
+      .capabilities {
+        display: flex;
+        gap: 11px;
+        margin-top: 26px;
+      }
+
+      .capabilities span {
+        padding: 9px 13px;
+        color: rgba(237, 234, 226, 0.83);
+        border: 1px solid rgba(237, 234, 226, 0.17);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.025);
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+      }
+
+      .orbit {
+        position: absolute;
+        top: -115px;
+        right: -42px;
+        width: 520px;
+        height: 520px;
+        border: 1px solid rgba(161, 164, 255, 0.16);
+        border-radius: 50%;
+      }
+
+      .orbit::before,
+      .orbit::after {
+        position: absolute;
+        border: 1px solid rgba(161, 164, 255, 0.13);
+        border-radius: inherit;
+        content: "";
+      }
+
+      .orbit::before { inset: 68px; }
+      .orbit::after { inset: 145px; }
+
+      .orbit-dot {
+        position: absolute;
+        top: 118px;
+        right: 188px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: #ff5d30;
+        box-shadow: 0 0 0 10px rgba(255, 93, 48, 0.1);
+      }
+
+      .location {
+        position: absolute;
+        right: 38px;
+        bottom: 30px;
+        color: rgba(237, 234, 226, 0.47);
+        font-family: "DM Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.17em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid"></div>
+    <div class="accent-line"></div>
+    <div class="monogram">R/K</div>
+    <div class="left-code">RENATO<br />KOŠTOMAJ<br />— 2026</div>
+    <main class="content">
+      <div class="eyebrow">TAX ANALYTICS · DIGITAL FORENSICS · EU COOPERATION</div>
+      <h1>Wider view.<br /><span>Calm execution.</span></h1>
+      <div class="capabilities">
+        <span>EUROFISC</span>
+        <span>E-COMMERCE</span>
+        <span>CROSS-BORDER</span>
+        <span>OPERATIONS</span>
+      </div>
+    </main>
+    <div class="orbit"><i class="orbit-dot"></i></div>
+    <div class="location">MARIBOR · SLOVENIA</div>
+  </body>
+</html>
