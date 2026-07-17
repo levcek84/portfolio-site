@@ -2575,7 +2575,7 @@ body.intro-active {
   .career-card {
     position: sticky;
     z-index: calc(1 + var(--stack-index));
-    top: calc(-6rem + var(--stack-index) * 8px);
+    top: var(--mobile-career-top, calc(-6rem + var(--stack-index) * 8px));
     min-height: 0;
     margin-bottom: clamp(11rem, 32svh, 18rem);
     padding-bottom: 2.8rem;
@@ -2583,7 +2583,7 @@ body.intro-active {
   }
 
   .career-card-stage:first-child .career-card {
-    top: -7.5rem;
+    top: var(--mobile-career-top, -7.5rem);
     margin-bottom: calc(clamp(11rem, 32svh, 18rem) + 3rem);
   }
 

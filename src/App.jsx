@@ -782,6 +782,7 @@ export default function App() {
   const progressRef = useRef(null);
   const cursorRef = useRef(null);
   const portraitRef = useRef(null);
+  const careerCardRefs = useRef([]);
   const menuButtonRef = useRef(null);
   const t = CONTENT[lang];
 
@@ -817,6 +818,41 @@ export default function App() {
       document.body.classList.remove("intro-active");
     };
   }, [shouldPlayIntro]);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 500px)");
+    const cards = careerCardRefs.current.filter(Boolean);
+
+    const updateCareerCardTops = () => {
+      const viewportHeight = window.visualViewport?.height || window.innerHeight;
+      const bottomClearance = 112;
+
+      cards.forEach((card, index) => {
+        if (!mobileQuery.matches) {
+          card.style.removeProperty("--mobile-career-top");
+          return;
+        }
+
+        const defaultTop = index === 0 ? -120 : -96 + index * 8;
+        const fittedTop = viewportHeight - card.offsetHeight - bottomClearance;
+        card.style.setProperty("--mobile-career-top", `${Math.min(defaultTop, fittedTop)}px`);
+      });
+    };
+
+    updateCareerCardTops();
+    const resizeObserver = new ResizeObserver(updateCareerCardTops);
+    cards.forEach((card) => resizeObserver.observe(card));
+    mobileQuery.addEventListener("change", updateCareerCardTops);
+    window.addEventListener("resize", updateCareerCardTops);
+    window.visualViewport?.addEventListener("resize", updateCareerCardTops);
+
+    return () => {
+      resizeObserver.disconnect();
+      mobileQuery.removeEventListener("change", updateCareerCardTops);
+      window.removeEventListener("resize", updateCareerCardTops);
+      window.visualViewport?.removeEventListener("resize", updateCareerCardTops);
+    };
+  }, [lang]);
 
   useEffect(() => {
     const nodes = document.querySelectorAll(".enter");
@@ -1111,7 +1147,10 @@ export default function App() {
                 style={{ "--stack-index": index }}
                 key={`${item.period}-${item.role}`}
               >
-                <article className={`career-card career-card--${item.theme} enter`}>
+                <article
+                  className={`career-card career-card--${item.theme} enter`}
+                  ref={(node) => { careerCardRefs.current[index] = node; }}
+                >
                   <div className="career-period">
                     <span>{item.period}</span>
                     {index === 0 && <em>{t.experience.current}</em>}
