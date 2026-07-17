@@ -2576,7 +2576,7 @@ body.intro-active {
   }
 
   .career-card-stage + .career-card-stage {
-    margin-top: calc(-4rem - var(--mobile-card-tail));
+    margin-top: calc(-14rem - var(--mobile-card-tail));
   }
 
   .career-card-stage:last-child {
