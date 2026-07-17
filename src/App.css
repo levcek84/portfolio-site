@@ -2582,6 +2582,11 @@ body.intro-active {
     transform: none;
   }
 
+  .career-card-stage:first-child .career-card {
+    top: -7.5rem;
+    margin-bottom: calc(clamp(11rem, 32svh, 18rem) + 3rem);
+  }
+
   .career-card-stage:last-child .career-card {
     position: relative;
     top: auto;
