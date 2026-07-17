@@ -2,6 +2,8 @@
 
 Dvojezična osebna predstavitvena stran, izdelana z Reactom in Vite. Vključuje odzivno postavitev, interaktivne kartice, animacije z upoštevanjem nastavitev za zmanjšano gibanje ter slovenski in angleški CV za prenos.
 
+**Spletna stran:** [renatokostomaj.com](https://renatokostomaj.com/)
+
 ## Lokalni zagon
 
 ```bash
