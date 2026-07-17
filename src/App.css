@@ -1125,6 +1125,10 @@ body.intro-active {
   margin-inline: auto;
 }
 
+.career-card-stage {
+  display: contents;
+}
+
 .career-card {
   position: sticky;
   top: calc(6.7rem + var(--stack-index) * 16px);
@@ -2560,21 +2564,38 @@ body.intro-active {
     padding-bottom: 7rem;
   }
 
-  .career-card {
+  .career-stack {
+    --mobile-card-tail: clamp(12rem, 58vw, 14rem);
+    isolation: isolate;
+  }
+
+  .career-card-stage {
     position: relative;
+    display: block;
+    padding-bottom: clamp(11rem, 30svh, 17rem);
+  }
+
+  .career-card-stage + .career-card-stage {
+    margin-top: calc(-4rem - var(--mobile-card-tail));
+  }
+
+  .career-card-stage:last-child {
+    padding-bottom: 0;
+  }
+
+  .career-card {
+    position: sticky;
     z-index: calc(1 + var(--stack-index));
-    top: auto;
+    top: calc(4.9rem + var(--stack-index) * 6px);
     min-height: 0;
     margin-bottom: 0;
-    padding-bottom: 2.8rem;
+    padding-bottom: calc(2.8rem + var(--mobile-card-tail));
     transform: none;
   }
 
-  .career-card + .career-card {
-    margin-top: -1.4rem;
-  }
-
-  .career-card:last-child {
+  .career-card-stage:last-child .career-card {
+    position: relative;
+    top: auto;
     padding-bottom: 1.4rem;
   }
 

@@ -1106,25 +1106,27 @@ export default function App() {
           </div>
           <div className="career-stack">
             {t.experience.items.map((item, index) => (
-              <article
-                className={`career-card career-card--${item.theme} enter`}
+              <div
+                className="career-card-stage"
                 style={{ "--stack-index": index }}
                 key={`${item.period}-${item.role}`}
               >
-                <div className="career-period">
-                  <span>{item.period}</span>
-                  {index === 0 && <em>{t.experience.current}</em>}
-                </div>
-                <div className="career-role">
-                  <span className="career-mark" aria-label={item.company}>{item.mark}</span>
-                  <h3>{item.role}</h3>
-                  <p>{item.company}</p>
-                </div>
-                <div className="career-copy">
-                  <p>{item.text}</p>
-                  <div>{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                </div>
-              </article>
+                <article className={`career-card career-card--${item.theme} enter`}>
+                  <div className="career-period">
+                    <span>{item.period}</span>
+                    {index === 0 && <em>{t.experience.current}</em>}
+                  </div>
+                  <div className="career-role">
+                    <span className="career-mark" aria-label={item.company}>{item.mark}</span>
+                    <h3>{item.role}</h3>
+                    <p>{item.company}</p>
+                  </div>
+                  <div className="career-copy">
+                    <p>{item.text}</p>
+                    <div>{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                  </div>
+                </article>
+              </div>
             ))}
           </div>
         </section>
