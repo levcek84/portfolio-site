@@ -2565,37 +2565,27 @@ body.intro-active {
   }
 
   .career-stack {
-    --mobile-card-tail: clamp(12rem, 58vw, 14rem);
     isolation: isolate;
   }
 
   .career-card-stage {
-    position: relative;
-    display: block;
-    padding-bottom: clamp(11rem, 30svh, 17rem);
-  }
-
-  .career-card-stage + .career-card-stage {
-    margin-top: calc(-14rem - var(--mobile-card-tail));
-  }
-
-  .career-card-stage:last-child {
-    padding-bottom: 0;
+    display: contents;
   }
 
   .career-card {
     position: sticky;
     z-index: calc(1 + var(--stack-index));
-    top: calc(4.9rem + var(--stack-index) * 6px);
+    top: calc(-6rem + var(--stack-index) * 8px);
     min-height: 0;
-    margin-bottom: 0;
-    padding-bottom: calc(2.8rem + var(--mobile-card-tail));
+    margin-bottom: clamp(11rem, 32svh, 18rem);
+    padding-bottom: 2.8rem;
     transform: none;
   }
 
   .career-card-stage:last-child .career-card {
     position: relative;
     top: auto;
+    margin-bottom: 0;
     padding-bottom: 1.4rem;
   }
 
