@@ -2594,7 +2594,23 @@ body.intro-active {
   }
 
   .case-feature-image {
-    min-height: 240px;
+    display: grid;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .case-feature {
+    grid-template-rows: auto auto;
+  }
+
+  .case-feature-image img {
+    height: auto;
+    aspect-ratio: 966 / 642;
+    object-fit: cover;
+  }
+
+  .case-feature-shade {
+    display: none;
   }
 
   .case-card {
@@ -2607,9 +2623,14 @@ body.intro-active {
   }
 
   .case-feature-caption {
-    right: 1rem;
-    bottom: 1rem;
-    left: 1rem;
+    position: static;
+    gap: 0.35rem;
+    padding: 1rem 1.25rem 1.1rem;
+    color: rgba(255, 255, 255, 0.68);
+    background: rgba(255, 255, 255, 0.025);
+    border-top: 1px solid var(--line-dark);
+    font-size: 0.52rem;
+    line-height: 1.55;
   }
 
   .world-image {
