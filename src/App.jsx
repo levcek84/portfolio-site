@@ -1066,9 +1066,13 @@ export default function App() {
                 {t.hero.secondary}<ArrowUpRight size={17} aria-hidden="true" />
               </a>
             </div>
+            <div className="opening-status opening-status--inline">
+              <i aria-hidden="true" />
+              <span>{t.hero.status}</span>
+            </div>
           </div>
 
-          <div className="opening-status">
+          <div className="opening-status opening-status--floating">
             <i aria-hidden="true" />
             <span>{t.hero.status}</span>
           </div>

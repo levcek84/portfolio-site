@@ -691,6 +691,10 @@ body.intro-active {
   letter-spacing: 0.08em;
 }
 
+.opening-status--inline {
+  display: none;
+}
+
 .opening-status i,
 .final-status i {
   width: 7px;
@@ -2298,10 +2302,14 @@ body.intro-active {
     width: calc(100% - 2.5rem);
   }
 
-  .opening-status {
-    right: auto;
-    bottom: 2rem;
-    left: 1.25rem;
+  .opening-status--floating {
+    display: none;
+  }
+
+  .opening-status--inline {
+    position: static;
+    display: inline-flex;
+    margin-top: 1rem;
   }
 
   .scroll-cue {
@@ -2489,7 +2497,7 @@ body.intro-active {
   }
 
   .opening {
-    min-height: 1100px;
+    min-height: 1180px;
   }
 
   .opening-eyebrow {
