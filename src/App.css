@@ -2549,8 +2549,16 @@ body.intro-active {
   }
 
   .manifesto {
+    padding-top: 4.5rem;
     padding-right: max(1.5rem, calc(env(safe-area-inset-right) + 1.25rem));
     padding-left: max(1.5rem, calc(env(safe-area-inset-left) + 1.25rem));
+  }
+
+  .approach,
+  .career,
+  .cases,
+  .proof {
+    padding-top: 5rem;
   }
 
   .manifesto-heading,
