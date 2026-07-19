@@ -12,6 +12,7 @@ dist
 dist-ssr
 tmp/
 *.local
+.codex-remote-attachments/
 
 # Private source documents must never be published or committed
 deliverables/private-originals/
