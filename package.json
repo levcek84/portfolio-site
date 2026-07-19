@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "generate:cv": "node scripts/generate-cv.mjs",
+    "generate:og": "node scripts/generate-og-image.mjs",
     "generate:linkedin-banner": "node scripts/generate-linkedin-banner.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
