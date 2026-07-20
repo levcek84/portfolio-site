@@ -35,6 +35,16 @@ const CONTACT = {
 const createDocumentRequestLink = (subject, body) =>
   `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
+const trackEvent = (eventName, properties = {}) => {
+  if (typeof window.zaraz?.track !== "function") return;
+
+  void window.zaraz.track(eventName, {
+    ...properties,
+    language: document.documentElement.lang,
+    path: window.location.pathname,
+  });
+};
+
 const THESIS_URL = "https://repozitorij.upr.si/IzpisGradiva.php?id=20400&lang=slv";
 
 const CV_DOCUMENTS = {
@@ -672,7 +682,10 @@ function LanguageToggle({ lang, setLang }) {
         <button
           type="button"
           key={value}
-          onClick={() => setLang(value)}
+          onClick={() => {
+            if (value !== lang) trackEvent("language_change", { from: lang, to: value });
+            setLang(value);
+          }}
           className={lang === value ? "is-active" : ""}
           aria-pressed={lang === value}
         >
@@ -722,7 +735,10 @@ function GlowCard({ item, labels, index }) {
     event.currentTarget.style.setProperty("--glow-x", `${event.clientX - rect.left}px`);
     event.currentTarget.style.setProperty("--glow-y", `${event.clientY - rect.top}px`);
   };
-  const toggleCard = () => setExpanded((current) => !current);
+  const toggleCard = () => setExpanded((current) => {
+    if (!current) trackEvent("approach_expand", { card: item.title });
+    return !current;
+  });
   const Icon = item.icon;
   const detailId = `approach-detail-${index}`;
 
@@ -767,9 +783,10 @@ function GlowCard({ item, labels, index }) {
 
 export default function App() {
   const [lang, setLang] = useState(() => {
+    if (/^\/en(?:\/|$)/.test(window.location.pathname)) return "en";
     const queryLanguage = new URLSearchParams(window.location.search).get("lang");
     if (queryLanguage === "sl" || queryLanguage === "en") return queryLanguage;
-    return localStorage.getItem("portfolio-language") || "sl";
+    return "sl";
   });
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -795,11 +812,16 @@ export default function App() {
     document.querySelector('meta[property="og:locale"]')?.setAttribute("content", META[lang].locale);
     document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", META[lang].title);
     document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", META[lang].description);
+    const canonicalUrl = lang === "en"
+      ? "https://renatokostomaj.com/en/"
+      : "https://renatokostomaj.com/";
+    const nextPath = lang === "en" ? "/en/" : "/";
     const url = new URL(window.location.href);
-    if (lang === "en") url.searchParams.set("lang", "en");
-    else url.searchParams.delete("lang");
+    url.pathname = nextPath;
+    url.searchParams.delete("lang");
     window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
-    document.querySelector('meta[property="og:url"]')?.setAttribute("content", url.href.split("#")[0]);
+    document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonicalUrl);
+    document.querySelector('meta[property="og:url"]')?.setAttribute("content", canonicalUrl);
     localStorage.setItem("portfolio-language", lang);
   }, [lang]);
 
@@ -1062,7 +1084,13 @@ export default function App() {
               <a className="action action--solid" href="#about">
                 {t.hero.primary}<ArrowDown size={17} aria-hidden="true" />
               </a>
-              <a className="action action--glass" href={CONTACT.linkedin} target="_blank" rel="noreferrer">
+              <a
+                className="action action--glass"
+                href={CONTACT.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackEvent("contact_click", { channel: "linkedin", location: "hero" })}
+              >
                 {t.hero.secondary}<ArrowUpRight size={17} aria-hidden="true" />
               </a>
             </div>
@@ -1263,7 +1291,13 @@ export default function App() {
             <p>{t.world.researchLabel}</p>
             <h4>{t.world.researchTitle}</h4>
             <span>{t.world.researchText}</span>
-            <a className="research-link" href={THESIS_URL} target="_blank" rel="noreferrer">
+            <a
+              className="research-link"
+              href={THESIS_URL}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackEvent("thesis_open")}
+            >
               {t.world.researchCta}<ArrowUpRight size={16} aria-hidden="true" />
             </a>
           </div>
@@ -1301,6 +1335,7 @@ export default function App() {
                   t.credentials.requestRecommendationsSubject,
                   t.credentials.requestRecommendationsBody,
                 )}
+                onClick={() => trackEvent("document_request", { document: "academic_recommendations" })}
               >
                 <Mail size={16} aria-hidden="true" />
                 {t.credentials.requestRecommendationsCta}
@@ -1308,7 +1343,12 @@ export default function App() {
               </a>
             </div>
 
-            <a className="cv-download enter" href={CV_DOCUMENTS[lang]} download>
+            <a
+              className="cv-download enter"
+              href={CV_DOCUMENTS[lang]}
+              download
+              onClick={() => trackEvent("cv_download", { version: lang })}
+            >
               <div>
                 <span>{t.credentials.cvLabel}</span>
                 <h3>{t.credentials.cvTitle}</h3>
@@ -1335,6 +1375,7 @@ export default function App() {
                         requestBody,
                       )}
                       aria-label={`${t.credentials.requestCta}: ${documentName}`}
+                      onClick={() => trackEvent("document_request", { document: document.en })}
                     >
                       <Mail size={15} aria-hidden="true" />
                       {t.credentials.requestCta}
@@ -1361,10 +1402,20 @@ export default function App() {
           </h2>
           <p className="final-text enter">{t.contact.text}</p>
           <div className="final-actions enter">
-            <a href={`mailto:${CONTACT.email}`} className="final-email">
+            <a
+              href={`mailto:${CONTACT.email}`}
+              className="final-email"
+              onClick={() => trackEvent("contact_click", { channel: "email", location: "contact" })}
+            >
               <Mail size={22} />{t.contact.email}<ArrowUpRight size={22} />
             </a>
-            <a href={CONTACT.linkedin} target="_blank" rel="noreferrer" className="final-linkedin">
+            <a
+              href={CONTACT.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="final-linkedin"
+              onClick={() => trackEvent("contact_click", { channel: "linkedin", location: "contact" })}
+            >
               <Linkedin size={19} />{t.contact.linkedin}
             </a>
           </div>
