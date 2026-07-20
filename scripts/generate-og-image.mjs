@@ -3,8 +3,8 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const output = path.join(root, "public", "renato-og-2026-v2.jpg");
-const url = process.env.OG_SOURCE_URL || "https://renato-kostomaj.pages.dev/";
+const output = path.join(root, "public", "renato-og-2026-v3-en.jpg");
+const url = process.env.OG_SOURCE_URL || "https://renatokostomaj.com/?lang=en";
 
 const browser = await puppeteer.launch({ headless: true });
 
@@ -13,7 +13,7 @@ try {
   await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
   await page.evaluateOnNewDocument(() => {
     sessionStorage.setItem("portfolio-intro-seen", "true");
-    localStorage.setItem("portfolio-language", "sl");
+    localStorage.setItem("portfolio-language", "en");
   });
   await page.goto(url, { waitUntil: "networkidle0" });
   await page.evaluate(() => document.fonts.ready);
