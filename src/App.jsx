@@ -36,12 +36,28 @@ const createDocumentRequestLink = (subject, body) =>
   `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
 const trackEvent = (eventName, properties = {}) => {
-  if (typeof window.zaraz?.track !== "function") return;
-
-  void window.zaraz.track(eventName, {
+  const event = {
     ...properties,
     language: document.documentElement.lang,
     path: window.location.pathname,
+  };
+
+  if (typeof window.zaraz?.track === "function") {
+    void window.zaraz.track(eventName, event);
+  }
+
+  const payload = JSON.stringify({ eventName, ...event });
+
+  if (typeof navigator.sendBeacon === "function") {
+    navigator.sendBeacon("/api/track", new Blob([payload], { type: "application/json" }));
+    return;
+  }
+
+  void fetch("/api/track", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: payload,
+    keepalive: true,
   });
 };
 
